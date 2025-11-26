@@ -1,2 +1,2 @@
-# portafolio-progrmacion
+# portafolio-programacion
 Portafolio de programacion - Danelis Caballero
