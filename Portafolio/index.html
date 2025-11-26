@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portafolio de Programación - Danelis Caballero</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --gray: #95a5a6;
+            --success: #2ecc71;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Header y Navegación */
+        header {
+            background-color: var(--primary);
+            color: white;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 2rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--secondary);
+        }
+        
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Secciones */
+        section {
+            padding: 5rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: var(--secondary);
+            margin: 0 auto;
+        }
+        
+        /* Hero Section */
+        #inicio {
+            background: linear-gradient(135deg, var(--primary) 0%, #1a2530 100%);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 80px;
+        }
+        
+        .hero-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 3rem;
+        }
+        
+        .hero-text {
+            flex: 1;
+        }
+        
+        .hero-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .profile-photo {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid var(--secondary);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        .hero-text h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero-text p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--secondary);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            margin: 0.3rem;
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--secondary);
+            color: var(--secondary);
+        }
+        
+        .btn-success {
+            background-color: var(--success);
+        }
+        
+        .btn:hover {
+            background-color: #2980b9;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--secondary);
+            color: white;
+        }
+
+        /* Tecnologías Section */
+        #tecnologias {
+            background-color: var(--light);
+        }
+
+        .tecnologias-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .tecnologia-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .tecnologia-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .tecnologia-img {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            margin: 0 auto 1rem;
+        }
+
+        .tecnologia-card h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Proyectos Section */
+        #proyectos, #investigaciones, #laboratorios, #talleres, #parciales, #ejercicios {
+            background-color: white;
+        }
+        
+        .proyectos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+        
+        .proyecto-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid #eee;
+        }
+        
+        .proyecto-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .proyecto-img {
+            height: 200px;
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+            overflow: hidden;
+        }
+        
+        .proyecto-content {
+            padding: 1.5rem;
+        }
+        
+        .proyecto-content h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .proyecto-content p {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+        
+        .tecnologias {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .tecnologia {
+            background-color: var(--secondary);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+        
+        .documentos-lista {
+            margin-top: 1rem;
+            border-top: 1px solid #eee;
+            padding-top: 1rem;
+        }
+        
+        .documento-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #f5f5f5;
+        }
+        
+        .documento-item:last-child {
+            border-bottom: none;
+        }
+        
+        /* Habilidades Section */
+        #habilidades {
+            background-color: var(--light);
+        }
+        
+        .habilidades-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .habilidad-categoria {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .habilidad-categoria h3 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--secondary);
+        }
+        
+        .habilidad-item {
+            margin-bottom: 1rem;
+        }
+        
+        .habilidad-item h4 {
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--primary);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: var(--secondary);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                flex-direction: column;
+                background-color: var(--primary);
+                transition: left 0.3s;
+                padding: 2rem 0;
+            }
+            
+            .nav-links.active {
+                left: 0;
+            }
+            
+            .nav-links li {
+                margin: 1rem 0;
+                text-align: center;
+            }
+            
+            .hero-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+            
+            .profile-photo {
+                width: 250px;
+                height: 250px;
+            }
+
+            .tecnologias-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            section {
+                padding: 3rem 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .tecnologias-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header y Navegación -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">Portafolio de Programación</div>
+                <div class="menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#objetivo">Objetivo</a></li>
+                    <li><a href="#tecnologias">Tecnologías</a></li>
+                    <li><a href="#habilidades">Habilidades</a></li>
+                    <li><a href="#proyectos">Proyectos</a></li>
+                    <li><a href="#investigaciones">Investigaciones</a></li>
+                    <li><a href="#laboratorios">Laboratorios</a></li>
+                    <li><a href="#talleres">Talleres</a></li>
+                    <li><a href="#ejercicios">Ejercicios</a></li>
+                    <li><a href="#parciales">Parciales</a></li>
+                    <li><a href="#conclusion">Conclusión</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Sección Inicio -->
+    <section id="inicio">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>¡Hola! Soy Danelis Caballero</h1>
+                    <p>Tengo 31 años y actualmente curso el <strong>segundo semestre</strong> de la carrera de Ciberseguridad. Mi interés por la tecnología y la protección de la información me ha llevado a explorar el mundo de la programación, donde he desarrollado habilidades en la creación de soluciones seguras y eficientes.</p>
+                    <a href="#proyectos" class="btn">Ver Mis Proyectos</a>
+                    <a href="#tecnologias" class="btn btn-outline">Tecnologías</a>
+                </div>
+                <div class="hero-image">
+                    <img src="Imagenes/foto-perfil.jpg" alt="Foto de Danelis Caballero" class="profile-photo" onerror="this.style.display='none'">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Objetivo -->
+    <section id="objetivo">
+        <div class="container">
+            <div class="section-title">
+                <h2>Objetivo del Portafolio</h2>
+            </div>
+            <div class="objetivo-content">
+                <p>Este portafolio recopila los proyectos y ejercicios que he realizado durante mi semestre en la materia de <strong>Programación</strong>. Mi objetivo es demostrar mi progreso, habilidades técnicas y mi capacidad y creatividad que he logrado desarrollar en el transcurso del semestre.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Tecnologías -->
+    <section id="tecnologias">
+        <div class="container">
+            <div class="section-title">
+                <h2>Tecnologías Utilizadas</h2>
+            </div>
+            <div class="tecnologias-grid">
+                <div class="tecnologia-card">
+                    <img src="Imagenes/java-logo.png" alt="Java" class="tecnologia-img" onerror="this.src='https://cdn-icons-png.flaticon.com/512/226/226777.png'">
+                    <h3>Java</h3>
+                    <p>Lenguaje de programación orientado a objetos utilizado para el desarrollo de aplicaciones.</p>
+                </div>
+                <div class="tecnologia-card">
+                    <img src="Imagenes/mysql-logo.png" alt="MySQL" class="tecnologia-img" onerror="this.src='https://cdn-icons-png.flaticon.com/512/1199/1199128.png'">
+                    <h3>MySQL</h3>
+                    <p>Sistema de gestión de bases de datos relacional utilizado para almacenar y gestionar datos.</p>
+                </div>
+                <div class="tecnologia-card">
+                    <img src="Imagenes/vscode-logo.png" alt="Visual Studio Code" class="tecnologia-img" onerror="this.src='https://cdn-icons-png.flaticon.com/512/906/906324.png'">
+                    <h3>VS Code</h3>
+                    <p>Editor de código fuente desarrollado por Microsoft con soporte para múltiples lenguajes.</p>
+                </div>
+                <div class="tecnologia-card">
+                    <img src="Imagenes/cisco-logo.png" alt="Cisco Packet Tracer" class="tecnologia-img" onerror="this.src='https://cdn-icons-png.flaticon.com/512/2111/2111646.png'">
+                    <h3>Cisco Packet Tracer</h3>
+                    <p>Herramienta de simulación de redes utilizada para diseñar y configurar redes complejas.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Habilidades -->
+    <section id="habilidades">
+        <div class="container">
+            <div class="section-title">
+                <h2>Habilidades Técnicas</h2>
+            </div>
+            <div class="habilidades-grid">
+                <div class="habilidad-categoria">
+                    <h3>Lenguajes de Programación</h3>
+                    <div class="habilidad-item">
+                        <h4>Java</h4>
+                        <p>Desarrollo de aplicaciones utilizando Java como lenguaje principal.</p>
+                    </div>
+                </div>
+                <div class="habilidad-categoria">
+                    <h3>Conceptos Clave</h3>
+                    <div class="habilidad-item">
+                        <h4>Estructuras de Datos</h4>
+                        <p>Implementación y uso de diferentes estructuras de datos.</p>
+                    </div>
+                    <div class="habilidad-item">
+                        <h4>Algoritmos</h4>
+                        <p>Desarrollo y optimización de algoritmos para resolver problemas.</p>
+                    </div>
+                    <div class="habilidad-item">
+                        <h4>Base de Datos</h4>
+                        <p>Diseño y gestión de bases de datos relacionales.</p>
+                    </div>
+                    <div class="habilidad-item">
+                        <h4>Buenas Prácticas</h4>
+                        <p>Aplicación de principios de código limpio y mejores prácticas.</p>
+                    </div>
+                </div>
+                <div class="habilidad-categoria">
+                    <h3>Herramientas</h3>
+                    <div class="habilidad-item">
+                        <h4>Visual Studio Code</h4>
+                        <p>Entorno de desarrollo principal para programación.</p>
+                    </div>
+                    <div class="habilidad-item">
+                        <h4>NetBeans</h4>
+                        <p>IDE utilizado para desarrollo en Java.</p>
+                    </div>
+                    <div class="habilidad-item">
+                        <h4>Cisco Packet Tracer</h4>
+                        <p>Simulación de redes y configuraciones.</p>
+                    </div>
+                    <div class="habilidad-item">
+                        <h4>MySQL</h4>
+                        <p>Gestión de bases de datos relacionales.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Proyectos con Documentos -->
+    <section id="proyectos">
+        <div class="container">
+            <div class="section-title">
+                <h2>Proyectos Destacados</h2>
+            </div>
+            <div class="proyectos-grid">
+                <!-- Proyecto 1 -->
+                <div class="proyecto-card">
+                    <div class="proyecto-img">
+                        <i class="fas fa-university"></i>
+                    </div>
+                    <div class="proyecto-content">
+                        <h3>Presentación Universitaria</h3>
+                        <p>Programa en Java que simula los datos (Universidad, Facultad, etc.) de una página de presentación de un trabajo.</p>
+                        <div class="tecnologias">
+                            <span class="tecnologia">Java</span>
+                        </div>
+                        <div class="documentos-lista">
+                            <div class="documento-item">
+                                <span>Código y Ejecución</span>
+                                <a href="Archivos/Laboratorio1.pdf" class="btn" target="_blank">Ver PDF</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Proyecto 2 -->
+                <div class="proyecto-card">
+                    <div class="proyecto-img">
+                        <i class="fas fa-file-invoice-dollar"></i>
+                    </div>
+                    <div class="proyecto-content">
+                        <h3>Sistema de Facturación</h3>
+                        <p>Programa en Java que simula la factura de una empresa con cantidad, descripción, costo unitario, total, subtotal y total final.</p>
+                        <div class="tecnologias">
+                            <span class="tecnologia">Java</span>
+                        </div>
+                        <div class="documentos-lista">
+                            <div class="documento-item">
+                                <span>Código y Ejecución</span>
+                                <a href="Archivos/Laboratorio1.pdf" class="btn" target="_blank">Ver PDF</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Proyecto 3 -->
+                <div class="proyecto-card">
+                    <div class="proyecto-img">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="proyecto-content">
+                        <h3>Conversor de Horas</h3>
+                        <p>Código que lee la hora en notación de 24 horas y la imprime en notación de 12 horas (ej: 13:45 → 1:45 PM).</p>
+                        <div class="tecnologias">
+                            <span class="tecnologia">Java</span>
+                        </div>
+                        <div class="documentos-lista">
+                            <div class="documento-item">
+                                <span>Código y Ejecución</span>
+                                <a href="Archivos/Laboratorio2.pdf" class="btn" target="_blank">Ver PDF</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Proyecto 4 -->
+                <div class="proyecto-card">
+                    <div class="proyecto-img">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <div class="proyecto-content">
+                        <h3>Sistema María Pan</h3>
+                        <p>Sistema de información para empresa familiar desarrollado con Java y MySQL Server para gestionar sus datos.</p>
+                        <div class="tecnologias">
+                            <span class="tecnologia">Java</span>
+                            <span class="tecnologia">MySQL</span>
+                        </div>
+                        <div class="documentos-lista">
+                            <div class="documento-item">
+                                <span>Documentación Completa</span>
+                                <a href="Archivos/Tallerpractico3.pdf" class="btn" target="_blank">Ver PDF</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Investigaciones -->
+    <section id="investigaciones">
+        <div class="container">
+            <div class="section-title">
+                <h2>Investigaciones</h2>
+            </div>
+            <div class="proyectos-grid">
+                <div class="proyecto-card">
+                    <div class="proyecto-content">
+                        <h3>Investigación 1: Construcción de Clases en Java</h3>
+                        <p>Temas cubiertos: Construcción de clase, miembros de una clase, modificadores de acceso y otras opciones en Java.</p>
+                        <div class="documentos-lista">
+                            <div class="documento-item">
+                                <span>Documento Completo</span>
+                                <a href="Archivos/Investigación1.pdf" class="btn" target="_blank">Ver PDF</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="proyecto-card">
+                    <div class="proyecto-content">
+                        <h3>Investigación 2: Análisis FODA - NetBeans vs Eclipse</h3>
+                        <p>Análisis FODA o DAFO comparando los IDE NetBeans y Eclipse para desarrollo en Java.</p>
+                        <div class="documentos-lista">
+                            <div class="documento-item">
+                                <span>Documento Completo</span>
+                                <a href="Archivos/Investigación2.pdf" class="btn" target="_blank">Ver PDF</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Laboratorios -->
+    <section id="laboratorios">
+        <div class="container">
+            <div class="section-title">
+                <h2>Laboratorios Prácticos</h2>
+            </div>
+            <div class="proyectos-grid">
+                <div class="proyecto-card">
+                    <div class="proyecto-content">
+                        <h3>Laboratorio Práctico 1</h3>
+                        <p>Configuración del entorno Windows (CMD) - JAVA y desarrollo de programas básicos en Java.</p>
+                        <div class="documentos-lista">
+                            <div class="documento-item">
+                                <span>Documento Completo</span>
+                                <a href="Archivos/Laboratorio1.pdf" class="btn" target="_blank">Ver PDF</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="proyecto-card">
+                    <div class="proyecto-content">
+                        <h3>Laboratorio Práctico 2</h3>
+                        <p>Desarrollo de problemas en Java: conversor de horas, cálculo de costos de automóvil y sistema de ventas.</p>
+                        <div class="documentos-lista">
+                            <div class="documento-item">
+                                <span>Documento Completo</span>
+                                <a href="Archivos/Laboratorio2.pdf" class="btn" target="_blank">Ver PDF</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Talleres -->
+    <section id="talleres">
+        <div class="container">
+            <div class="section-title">
+                <h2>Talleres Prácticos</h2>
+            </div>
+            <div class="proyectos-grid">
+                <div class="proyecto-card">
+                    <div class="proyecto-content">
+                        <h3>Taller Práctico 1</h3>
+                        <p>Sistema de ventas para compañía de refrescos con tres productos: cola, naranja y limón.</p>
+                        <div class="documentos-lista">
+                            <div class="documento-item">
+                                <span>Documento Completo</span>
+                                <a href="Archivos/Tallerpractico1.pdf" class="btn" target="_blank">Ver PDF</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="proyecto-card">
+                    <div class="proyecto-content">
+                        <h3>Taller Práctico 3</h3>
+                        <p>Desarrollo del Sistema de Información para María Pan con Java y MySQL Server.</p>
+                        <div class="documentos-lista">
+                            <div class="documento-item">
+                                <span>Documento Completo</span>
+                                <a href="Archivos/Tallerpractico3.pdf" class="btn" target="_blank">Ver PDF</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Ejercicios Prácticos -->
+    <section id="ejercicios">
+        <div class="container">
+            <div class="section-title">
+                <h2>Ejercicios Prácticos</h2>
+            </div>
+            <div class="proyectos-grid">
+                <div class="proyecto-card">
+                    <div class="proyecto-content">
+                        <h3>Ejercicio Práctico 1</h3>
+                        <p>Desarrollo de problemas en Java aplicando conceptos avanzados de programación.</p>
+                        <div class="documentos-lista">
+                            <div class="documento-item">
+                                <span>Documento Completo</span>
+                                <a href="Archivos/Ejerciciopractico.pdf" class="btn" target="_blank">Ver PDF</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Parciales -->
+    <section id="parciales">
+        <div class="container">
+            <div class="section-title">
+                <h2>Exámenes Parciales</h2>
+            </div>
+            <div class="proyectos-grid">
+                <div class="proyecto-card">
+                    <div class="proyecto-content">
+                        <h3>Parcial 1</h3>
+                        <p>Problemas en Java y ejercicios con Cisco Packet Tracer.</p>
+                        <div class="documentos-lista">
+                            <div class="documento-item">
+                                <span>Documento Completo</span>
+                                <a href="Archivos/Parcial1.pdf" class="btn" target="_blank">Ver PDF</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="proyecto-card">
+                    <div class="proyecto-content">
+                        <h3>Parcial 2</h3>
+                        <p>Prototipo de Sistema de Mantenimiento para la empresa NIBARRA.</p>
+                        <div class="documentos-lista">
+                            <div class="documento-item">
+                                <span>Documento Completo</span>
+                                <a href="Archivos/Parcial2.pdf" class="btn" target="_blank">Ver PDF</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Conclusión -->
+    <section id="conclusion">
+        <div class="container">
+            <div class="section-title">
+                <h2>Conclusión</h2>
+            </div>
+            <div class="conclusion-content">
+                <p>Este portafolio demuestra mi evolución en programación Java, aplicando estructuras de datos, algoritmos y MySQL. Desarrollé soluciones prácticas, culminando en un sistema de información para "María Pan", NIBARRA y otros, que integra todos los conceptos aprendidos y refleja mi capacidad para crear software funcional y enfrentar desafíos de desarrollo reales.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <h3>Danelis Caballero</h3>
+                <p>Portafolio de Programación - Segundo Semestre de Ciberseguridad</p>
+                <div class="social-links">
+                    <a href="#"><i class="fas fa-envelope"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                </div>
+                <p>Contacto: daneliscaballero@gmail.com</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Menú móvil
+        document.querySelector('.menu-toggle').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+        
+        // Cerrar menú al hacer clic en un enlace (en móviles)
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.querySelector('.nav-links').classList.remove('active');
+            });
+        });
+        
+        // Animación de aparición al hacer scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        
+        // Aplicar animación a las secciones
+        document.querySelectorAll('section').forEach(section => {
+            section.style.opacity = 0;
+            section.style.transform = 'translateY(20px)';
+            section.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
